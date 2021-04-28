@@ -1,11 +1,12 @@
 using System;
 
-namespace Proyecto_Final_Programacion
+namespace Proyecto_Final
 {
     class Program
     {
         static void Main(string[] args)
         {
+            //Comenzamos creando el menú
             DatosPrestamos prestamos = new DatosPrestamos();
 
             string datos = "";
@@ -14,20 +15,12 @@ namespace Proyecto_Final_Programacion
 
             while (menu)
             {
-                Console.BackgroundColor = ConsoleColor.DarkGreen;
                 Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.WriteLine(" _______________________________________________");
-                Console.WriteLine("|                                               |");
-                Console.WriteLine("|Bienvenido al sistema calculadora de prestamos.|");
-                Console.WriteLine("|-----------------------------------------------|");
-                Console.WriteLine("|1-Introduzca los datos del prestamo.           |");
-                Console.WriteLine("|-----------------------------------------------|");
-                Console.WriteLine("|2-Generar una tabla Amortizada.                |");
-                Console.WriteLine("|-----------------------------------------------|");
-                Console.WriteLine("|3-Salir.                                       |");
-                Console.WriteLine("|_______________________________________________|\n");
-                Console.Write("Escriba la opción que desee: ");
+                Console.WriteLine("Bienvenido al sistema calculadora de prestamos.");
+                Console.WriteLine("1-Introduzca los datos del prestamo.           ");
+                Console.WriteLine("2-Generar una tabla Amortizada.                ");
+                Console.WriteLine("3-Salir.                                       ");
+                Console.Write("Digite su primera opción: ");
                 datos = Console.ReadLine();
 
                 switch (datos)
@@ -50,7 +43,8 @@ namespace Proyecto_Final_Programacion
 
                     default:
                         Console.Clear();
-                        Console.Write("Ha introducido un valor invalido, presione cualquier tecla para regresar al menu principal.");
+                        Console.Write("Error, por favor verifique e inténtelo de nuevo.");
+                        Console.Write("Presione cualquier tecla para volver");
                         Console.ReadKey();
                         break;
 
@@ -66,7 +60,7 @@ namespace Proyecto_Final_Programacion
 class DatosPrestamos
 {
 
-
+    //Seguimos con la opcion 1
     public double Interes_pagado, Capital_pagado, monto_prestamo, interes_anual, cuotas;
     public int fila, meses, i;
     public string beneficiario;
@@ -106,13 +100,13 @@ class DatosPrestamos
         Console.WriteLine("--------------------------------------------------------------------------------------");
         Console.WriteLine("Para poder ver su tabla Amortizada dirijase al menu anterior y seleccione la opcion 2.");
         Console.WriteLine("--------------------------------------------------------------------------------------");
-        Console.Write("Presione cualquier tecla para volver.");
+        Console.Write("Presione una tecla para volver.");
         Console.ReadKey();
         Console.Clear();
 
     }
 
-
+     //Luego, seguimos con la interfaz para que se muestre la opción 2
     public void tabla()
     {
         Console.Clear();
@@ -120,11 +114,11 @@ class DatosPrestamos
         fila = 1;
         Console.WriteLine();
         Console.WriteLine();
-        Console.Write(" Número de pago \t");
+        Console.Write(" Numero de pago \t");
         Console.Write("Cuota \t\t");
         Console.Write("Intereses Pagados \t\t");
-        Console.Write("Capital Pagado \t\t");
-        Console.Write("Monto del prestamo \t\t");
+        Console.Write("Capital Pagado \t\t\t");
+        Console.Write("Monto del prestamo \t\t\t");
         Console.WriteLine();
         Console.WriteLine();
 
