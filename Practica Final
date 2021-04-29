@@ -6,14 +6,15 @@ namespace Proyecto_Final
     {
         static void Main(string[] args)
         {
-            //Comenzamos creando el menú
-            DatosPrestamos prestamos = new DatosPrestamos();
-
             string datos = "";
-            bool menu = true;
+            bool lista = true;
+            
+            //Comenzamos creando el menú
+            PrestamosInformacion prestamos = new PrestamosInformacion();
 
+           
 
-            while (menu)
+            while (lista)
             {
                 Console.Clear();
                 Console.WriteLine("Bienvenido al sistema calculadora de prestamos.");
@@ -38,7 +39,7 @@ namespace Proyecto_Final
                         break;
 
                     case "3":
-                        menu = false;
+                        lista = false;
                         break;
 
                     default:
@@ -57,24 +58,24 @@ namespace Proyecto_Final
 }
 
 
-class DatosPrestamos
+class PrestamosInformacion
 {
 
-    //Seguimos con la opcion 1
-    public double Interes_pagado, Capital_pagado, monto_prestamo, interes_anual, cuotas;
-    public int fila, meses, i;
-    public string beneficiario;
+    //Seguimos con la opcion 1 de la lista
+    public double interes_a_pagar, Capital_pagado, cantidad_Prestamo, interes_anual, cuotas_a_pagar;
+    public int fila, meses, utilidad;
+    public string receptor;
     public void datos()
     {
 
         Console.Clear();
-        Console.Write("Intruduzca el nombre del beneficiario: ");
+        Console.Write("Nombre: ");
 
-        beneficiario = Console.ReadLine();
+        receptor = Console.ReadLine();
 
         Console.Write("Monto del préstamo en RD$: ");
 
-        monto_prestamo = Convert.ToDouble(Console.ReadLine());
+        cantidad_Prestamo = Convert.ToDouble(Console.ReadLine());
 
         Console.Write("Tasa de Porcentaje Anual %: ");
 
@@ -92,14 +93,13 @@ class DatosPrestamos
         interes_anual = ((interes_anual / 100) / 12);
 
         //Fórmula para calcular la cuota del préstamo.
-        cuotas = (monto_prestamo * interes_anual) / (1 - Math.Pow((1 + interes_anual), (-meses)));
+        cuotas_a_pagar = (cantidad_Prestamo * interes_anual) / (1 - Math.Pow((1 + interes_anual), (-meses)));
 
 
-        Console.WriteLine("--------------------------------------------------------------------------------------");
-        Console.WriteLine("Usted estará pagando mensual: RD$"  + "{0:N2}", cuotas);
-        Console.WriteLine("--------------------------------------------------------------------------------------");
-        Console.WriteLine("Para poder ver su tabla Amortizada dirijase al menu anterior y seleccione la opcion 2.");
-        Console.WriteLine("--------------------------------------------------------------------------------------");
+        Console.WriteLine("Usted estará pagando mensual: RD$"  + "{0:N2}", cuotas_a_pagar);
+        Console.WriteLine("                                             ");
+        Console.WriteLine("Seleccione la opcion 2 para poder ver su tabla Amortizada al regresar al menú.");
+        Console.WriteLine("                                             ");
         Console.Write("Presione una tecla para volver.");
         Console.ReadKey();
         Console.Clear();
@@ -109,41 +109,42 @@ class DatosPrestamos
      //Luego, seguimos con la interfaz para que se muestre la opción 2
     public void tabla()
     {
-        Console.Clear();
-        Console.WriteLine("Beneficiario: " + beneficiario);
         fila = 1;
+        Console.Clear();
+        Console.WriteLine("Nombre: " + receptor);
         Console.WriteLine();
         Console.WriteLine();
         Console.Write(" Numero de pago \t");
         Console.Write("Cuota \t\t");
         Console.Write("Intereses Pagados \t\t");
-        Console.Write("Capital Pagado \t\t\t");
-        Console.Write("Monto del prestamo \t\t\t");
+        Console.Write("Capital Pagado \t\t");
+        Console.Write("Total del prestamo \t\t");
         Console.WriteLine();
         Console.WriteLine();
 
 
-        for (i = 0; i < meses; i++)
+       //Por último, la opción número 2 o tabla Amortizada
+        for (utilidad = 0; utilidad < meses; utilidad++)
         {
 
 
             Console.Write("\t{0}\t\t", fila);
 
 
-            Console.Write("{0:N2}", cuotas);
+            Console.Write("{0:N2}", cuotas_a_pagar);
 
 
-            Interes_pagado = interes_anual * monto_prestamo;
-            Console.Write("\t\t" + "{0:N2}", Interes_pagado);
+            interes_a_pagar = interes_anual * cantidad_Prestamo;
+            Console.Write("\t\t" + "{0:N2}", interes_a_pagar);
 
 
-            Capital_pagado = cuotas - Interes_pagado;
+            Capital_pagado = cuotas_a_pagar - interes_a_pagar;
             Console.Write("\t\t" + "{0:N2}", Capital_pagado);
 
 
-            monto_prestamo = monto_prestamo - Capital_pagado;
+            cantidad_Prestamo = cantidad_Prestamo - Capital_pagado;
 
-            Console.Write("\t\t" + "{0:N2}", monto_prestamo);
+            Console.Write("\t\t" + "{0:N2}", cantidad_Prestamo);
             Console.Write("\n");
 
             fila = fila + 1;
